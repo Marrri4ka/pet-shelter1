@@ -36,6 +36,7 @@ PetShelter.prototype.adoptPet = function(id){
       }
     }
   };
+  return false;
 }
 
 // Business logic for Pet
