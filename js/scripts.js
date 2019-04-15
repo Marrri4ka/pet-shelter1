@@ -40,15 +40,15 @@ function Pet(name,age,species){
 // User Interface
 
 var petShelter = new PetShelter();
+
 function displayPetShelter(petShelterToDisplay){
   var petList = $("ul#pets");
   var htmlForPetInfo ="";
   petShelterToDisplay.pets.forEach(function(pet){
-htmlForPetInfo+="<li id="+pet.id+">" + pet.name + "</li>";
+    htmlForPetInfo+="<li id="+pet.id+">" + pet.name + "</li>";
   });
   petList.html(htmlForPetInfo);
 };
-
 
 function showPet(petId){
   var pet = petShelter.findPet(petId);
