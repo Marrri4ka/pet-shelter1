@@ -66,3 +66,19 @@ function attachPetListeners() {
   });
   displayPetShelter(petShelter);
 }
+$(document).ready(function(event){
+  attachPetListeners();
+  event.preventDefault();
+
+$("form#formOne").submit(function(){
+
+
+var inputtedName = $("input#name").val();
+var inputtedAge = $("input#age").val();
+var inputtedSpecies = $("input#species").val();
+var newPet = new Pet(inputtedName,inputtedAge,inputtedSpecies);
+petShelter.addPet(newPet);
+displayPetShelter(petShelter);
+
+});
+});
