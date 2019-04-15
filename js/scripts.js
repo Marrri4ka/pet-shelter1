@@ -60,7 +60,7 @@ function displayPetShelter(petShelterToDisplay){
   var petList = $("ul#pets");
   var htmlForPetInfo ="";
   petShelterToDisplay.pets.forEach(function(pet){
-    htmlForPetInfo+="<li id="+pet.id+">" + pet.name +   "<p> Adopt:<span class='adopt'>" + pet.adopted + "</span></p></li>";
+    // htmlForPetInfo+="<li id="+pet.id+">" + pet.name +   "<p> Adopt:<span class='adopt'>" + pet.adopted + "</span></p></li>";
   });
   petList.html(htmlForPetInfo);
 };
@@ -85,6 +85,7 @@ function attachPetListeners() {
   $("#buttons").on("click", ".adopt-button", function() {
    petShelter.markAdopt(this.id);
   displayPetShelter(petShelter);
+  $("#show-pet").hide();
 });
 };
 $(document).ready(function(){
