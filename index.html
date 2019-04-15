@@ -11,8 +11,9 @@
   <body>
     <div class="container">
       <h1>Pet Shelter</h1>
-      <h2>Add Pet:</h2>
+
       <form id="formOne">
+        <h2>Add Pet:</h2>
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" class="form-control" id="name">
@@ -27,10 +28,11 @@
         </div>
         <button type="submit" class="btn-primary">Add</button>
       </form>
-      <h2>Pets:</h2>
-      <ul id="pets">
-
-      </ul>
+      <div class="list">
+        <h2>Pets:</h2>
+        <ul id="pets">
+        </ul>
+      </div>
 
 <div id="show-pet">
   <p>Name:<span class ="name"></span></p>
@@ -41,7 +43,7 @@
 
 </div>
 </div>
-
+<button id ="add-pet" type="button" name="button">Add Pet</button>
 
     </div>
   </body>

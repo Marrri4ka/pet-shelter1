@@ -55,15 +55,15 @@ var toby = new Pet("Toby", 4, 'DSH', false);
 petShelter.addPet(toby);
 petShelter.adoptPet(1);
 
+
 function displayPetShelter(petShelterToDisplay){
   var petList = $("ul#pets");
   var htmlForPetInfo ="";
   petShelterToDisplay.pets.forEach(function(pet){
-htmlForPetInfo+="<li id="+pet.id+">" + pet.name + "</li>";
+    htmlForPetInfo+="<li id="+pet.id+">" + pet.name +   "<p> Adopt:<span class='adopt'>" + pet.adopted+ "</span></p></li>";
   });
   petList.html(htmlForPetInfo);
 };
-
 
 function showPet(petId){
   var pet = petShelter.findPet(petId);
@@ -78,7 +78,7 @@ function showPet(petId){
 };
 
 function attachPetListeners() {
-  $("ul#pets").on("click", "li", function () {
+  $("ul#pets").on("click", "li", function() {
     showPet(this.id);
   });
   displayPetShelter(petShelter);
@@ -91,17 +91,23 @@ function attachPetListeners() {
 }
 
 $(document).ready(function(){
-  attachPetListeners();
-
+    attachPetListeners();
   $("form#formOne").submit(function(event){
     event.preventDefault();
-
     var inputtedName = $("input#name").val();
     var inputtedAge = $("input#age").val();
     var inputtedSpecies = $("input#species").val();
     var newPet = new Pet(inputtedName,inputtedAge,inputtedSpecies);
     petShelter.addPet(newPet);
     displayPetShelter(petShelter);
+    $(".list").show();
+    $("form#formOne").hide();
+    $("#add-pet").show();
+  });
 
+  $("#add-pet").click(function(){
+  $("form#formOne").show();
+  $("#add-pet").hide();
+  $(".list").hide();
   });
 });
