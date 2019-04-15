@@ -31,7 +31,7 @@ PetShelter.prototype.markAdopt = function(id){
   for (var i=0; i < this.pets.length; i++) {
     if (this.pets[i]) {
       if (this.pets[i].id == id) {
-        this.pets[i].adopted=true;
+        this.pets[i].adopted = true;
         return true;
       }
     }
@@ -60,7 +60,7 @@ function displayPetShelter(petShelterToDisplay){
   var petList = $("ul#pets");
   var htmlForPetInfo ="";
   petShelterToDisplay.pets.forEach(function(pet){
-    htmlForPetInfo+="<li id="+pet.id+">" + pet.name +   "<p> Adopt:<span class='adopt'>" + pet.adopted+ "</span></p></li>";
+    htmlForPetInfo+="<li id="+pet.id+">" + pet.name +   "<p> Adopt:<span class='adopt'>" + pet.adopted + "</span></p></li>";
   });
   petList.html(htmlForPetInfo);
 };
@@ -71,16 +71,27 @@ function showPet(petId){
   $(".name").html(pet.name);
   $(".age").html(pet.age);
   $(".species").html(pet.species);
+  $(".adopted").html(pet.adopted.toString());
+  console.log(pet);
+  var buttons = $("#buttons");
+  buttons.empty();
+  buttons.append("<button class='adopt-button' id=" + pet.id + ">Adopt</button>");
 };
 
 function attachPetListeners() {
   $("ul#pets").on("click", "li", function() {
     showPet(this.id);
   });
+  $("#buttons").on("click", ".adopt-button", function() {
+   petShelter.markAdopt(this.id);
   displayPetShelter(petShelter);
-}
-
+});
+};
 $(document).ready(function(){
+
+  var petVasya = new Pet ("vasya", "1year", "cat");
+  petShelter.addPet(petVasya);
+  displayPetShelter(petShelter);
     attachPetListeners();
   $("form#formOne").submit(function(event){
     event.preventDefault();
@@ -100,4 +111,6 @@ $(document).ready(function(){
     $("#add-pet").hide();
     $(".list").hide();
   });
+
+
 });
