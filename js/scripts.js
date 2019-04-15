@@ -8,6 +8,7 @@ function PetShelter() {
 
 PetShelter.prototype.addPet = function(pet){
   pet.id = this.assignId();
+  pet.adopted = false;
   this.pets.push(pet);
 }
 
@@ -27,19 +28,32 @@ PetShelter.prototype.findPet = function(id){
   return false;
 }
 
+PetShelter.prototype.adoptPet = function(id){
+  for (var i=0; i < this.pets.length; i++) {
+    if (this.pets[i]) {
+      if (this.pets[i].id == id) {
+        this.pets[i].adopted = true;
+      }
+    }
+  };
+}
+
 // Business logic for Pet
-function Pet(name,age,species){
+function Pet(name,age,species,adopted){
   this.name = name,
   this.age = age,
-  this.species = species
+  this.species = species,
+  this.adopted = adopted;
 }
+
 
 // User Interface
 
 var petShelter = new PetShelter();
 
-var toby = new Pet("Toby", 4, 'DSH');
+var toby = new Pet("Toby", 4, 'DSH', false);
 petShelter.addPet(toby);
+petShelter.adoptPet(1);
 
 function displayPetShelter(petShelterToDisplay){
   var petList = $("ul#pets");
@@ -57,6 +71,10 @@ function showPet(petId){
   $(".name").html(pet.name);
   $(".age").html(pet.age);
   $(".species").html(pet.species);
+  $(".adopted").text(pet.adopted);
+  var buttons = $("#buttons");
+  buttons.empty();
+  buttons.append("<button class='adoptButton' id=" +  + pet.id + ">Adopt Pet</button>");
 };
 
 function attachPetListeners() {
@@ -64,7 +82,14 @@ function attachPetListeners() {
     showPet(this.id);
   });
   displayPetShelter(petShelter);
+  if (!this.adopted) {
+    $("#buttons").on("click", ".adoptButton", function() {
+      petShelter.adoptPet(this.id);
+      showPet(this.id);
+    });
+  }
 }
+
 $(document).ready(function(){
   attachPetListeners();
 
