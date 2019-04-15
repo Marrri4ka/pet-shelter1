@@ -25,21 +25,23 @@ PetShelter.prototype.findPet = function(id){
     }
   };
   return false;
-
 }
 
 // Business logic for Pet
-
 function Pet(name,age,species){
   this.name = name,
   this.age = age,
   this.species = species
 }
 
-
 // User Interface
 
 var petShelter = new PetShelter();
+
+var toby = new Pet("Toby", 4, 'DSH');
+petShelter.addPet(toby);
+console.log(petShelter);
+
 function displayPetShelter(petShelterToDisplay){
   var petList = $("ul#pets");
   var htmlForPetInfo ="";
@@ -57,3 +59,10 @@ function showPet(petId){
   $(".age").html(pet.age);
   $(".species").html(pet.species);
 };
+
+function attachPetListeners() {
+  $("ul#pets").on("click", "li", function () {
+    showPet(this.id);
+  });
+  displayPetShelter(petShelter);
+}
