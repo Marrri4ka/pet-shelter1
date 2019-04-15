@@ -40,7 +40,6 @@ var petShelter = new PetShelter();
 
 var toby = new Pet("Toby", 4, 'DSH');
 petShelter.addPet(toby);
-console.log(petShelter);
 
 function displayPetShelter(petShelterToDisplay){
   var petList = $("ul#pets");
@@ -66,19 +65,18 @@ function attachPetListeners() {
   });
   displayPetShelter(petShelter);
 }
-$(document).ready(function(event){
+$(document).ready(function(){
   attachPetListeners();
-  event.preventDefault();
 
-$("form#formOne").submit(function(){
+  $("form#formOne").submit(function(event){
+    event.preventDefault();
 
+    var inputtedName = $("input#name").val();
+    var inputtedAge = $("input#age").val();
+    var inputtedSpecies = $("input#species").val();
+    var newPet = new Pet(inputtedName,inputtedAge,inputtedSpecies);
+    petShelter.addPet(newPet);
+    displayPetShelter(petShelter);
 
-var inputtedName = $("input#name").val();
-var inputtedAge = $("input#age").val();
-var inputtedSpecies = $("input#species").val();
-var newPet = new Pet(inputtedName,inputtedAge,inputtedSpecies);
-petShelter.addPet(newPet);
-displayPetShelter(petShelter);
-
-});
+  });
 });
